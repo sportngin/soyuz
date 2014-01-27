@@ -21,7 +21,7 @@ Or install it yourself as:
 ```yaml
 # .soyuz.yml in the app you want to deploy with soyuz
 default:
-  deploy_cmd: 'opsicle deploy $ENVIORMENT'
+  deploy_cmd: 'opsicle deploy $SOYUZ_ENVIRONMENT'
   options:
     - migrate
     
@@ -41,7 +41,25 @@ environments:
 
 ## Usage
 
-`bundle exec soyuz deploy`
+```bash
+bundle exec soyuz deploy
+# => 1. prodcution
+# => 2. staging
+1
+# soyuz calls the before_deploy_cmds in the order they are defined
+accept-pull
+# script to merge your pull request grom github
+# ...
+tag-release
+# script to build a new release for deployment
+# ...
+# soyuz call the deploy command for the given environment
+opsicle deploy --wait production
+# waits for a deploy to AWS OpsWorks
+# soyuz calls the after_deploy_cmds in the order they are defined
+post-deploy-notes
+# post all of your deploy notes somewhere useful
+```
 
 ## Contributing
 
