@@ -16,6 +16,23 @@ Or install it yourself as:
 
     $ gem install soyuz
 
+## Configure
+
+```
+
+default:
+ deploy_cmd: 'opsicle deploy $ENVIORMENT'
+
+ options:
+
+    - migrate
+
+environments:
+
+  - production:
+
+```
+
 ## Usage
 
 `bundle exec soyuz deploy`
