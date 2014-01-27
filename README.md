@@ -18,18 +18,24 @@ Or install it yourself as:
 
 ## Configure
 
-```
+```yaml
 
 default:
- deploy_cmd: 'opsicle deploy $ENVIORMENT'
-
- options:
-
+  deploy_cmd: 'opsicle deploy $ENVIORMENT'
+  options:
     - migrate
-
+    
 environments:
-
-  - production:
+  - 
+    production:
+      deploy_cmd: 'opsicle deploy --wait production'
+      before_deploy_cmds:
+        - accept-pull
+        - tag-release
+      after_deploy_cmds:
+        - post-deploy-notes
+  -
+    staging: {}
 
 ```
 
