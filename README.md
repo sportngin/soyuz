@@ -43,7 +43,7 @@ environments:
 
 ```bash
 bundle exec soyuz deploy
-# => 1. prodcution
+# => 1. production
 # => 2. staging
 1
 # soyuz calls the before_deploy_cmds in the order they are defined
