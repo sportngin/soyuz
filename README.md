@@ -28,7 +28,7 @@ default:
 environments:
   - 
     production:
-      deploy_cmd: 'opsicle deploy --wait production'
+      deploy_cmd: 'super-special-production-deploy-cmd'
       before_deploy_cmds:
         - accept-pull
         - tag-release
@@ -54,8 +54,7 @@ tag-release
 # script to build a new release for deployment
 # ...
 # soyuz call the deploy command for the given environment
-opsicle deploy --wait production
-# waits for a deploy to AWS OpsWorks
+super-special-production-deploy-cmd
 # soyuz calls the after_deploy_cmds in the order they are defined
 post-deploy-notes
 # post all of your deploy notes somewhere useful
