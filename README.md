@@ -1,6 +1,6 @@
 # Soyuz
 
-TODO: Write a gem description
+The trusty old deployment tool kit that glues all of your deployment tool chain together.
 
 ## Installation
 
@@ -18,11 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`bundle exec soyuz deploy`
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/soyuz/fork )
+1. Fork it ( http://github.com/sportngin/soyuz/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "soyuz"
   spec.version       = Soyuz::VERSION
   spec.authors       = ["Andy Fleener"]
-  spec.email         = ["andrew.fleener@tstmedia.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.email         = ["andrew.fleener@sportngin.com"]
+  spec.summary       = %q{The old trusty deployment toolkit}
+  spec.description   = %q{Soyuz is the deployment toolkit that glues all of your deployment pipeline together}
+  spec.homepage      = "https://github.com/sportngin/soyuz"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
