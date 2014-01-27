@@ -32,7 +32,7 @@ environments:
           display: "Deploy"
           cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling"
         -
-          display: "Deploy with migrations"
+          display: "Deploy with Migrations"
           cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling_migrations"
  
       before_deploy_cmds:
