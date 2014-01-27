@@ -22,13 +22,19 @@ Or install it yourself as:
 # .soyuz.yml in the app you want to deploy with soyuz
 default:
   deploy_cmd: 'opsicle deploy $SOYUZ_ENVIRONMENT'
-  options:
-    - migrate
+  
     
 environments:
   - 
     production:
-      deploy_cmd: 'super-special-production-deploy-cmd'
+      deploy_cmd: 
+        -
+          display: "Deploy"
+          cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling"
+        -
+          display: "Deploy with migrations"
+          cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling_migrations"
+ 
       before_deploy_cmds:
         - accept-pull
         - tag-release
@@ -54,7 +60,10 @@ tag-release
 # script to build a new release for deployment
 # ...
 # soyuz call the deploy command for the given environment
-super-special-production-deploy-cmd
+1. Deploy
+2. Deploy with Migrations
+2
+cap production deploy:rolling_migrations
 # soyuz calls the after_deploy_cmds in the order they are defined
 post-deploy-notes
 # post all of your deploy notes somewhere useful
