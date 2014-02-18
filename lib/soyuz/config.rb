@@ -24,7 +24,11 @@ module Soyuz
     end
 
     def valid?
-      File.exists?(@config_file) && config_data.is_a?(Hash)
+      begin
+        File.exists?(@config_file) && config_data.is_a?(Hash)
+      rescue StandardError
+        false
+      end
     end
   end
   InvalidConfig = Class.new(StandardError)
