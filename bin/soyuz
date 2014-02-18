@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'commander/import'
+require 'soyuz'
+
+# :name is optional, otherwise uses the basename of this executable
+program :name, 'soyuz'
+program :version, Soyuz::VERSION
+program :description, 'The trusty old deployment tool-kit'
+default_command :help
+global_option('-c', '--config FILE', 'soyuz config file')
+
+command :check do |c|
+  c.syntax = "soyuz check [options]"
+  c.description = "Check your config file to ensure it's valid"
+  c.action do |args, options|
+    options.default config: ".soyuz.yml"
+    Soyuz::Config.new(options.config).check
+  end
+end

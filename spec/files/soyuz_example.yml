@@ -1,0 +1,23 @@
+# .soyuz.yml in the app you want to deploy with soyuz
+default:
+  deploy_cmd: 'opsicle deploy $SOYUZ_ENVIRONMENT'
+
+environments:
+  -
+    production:
+      deploy_cmd:
+        -
+          display: "Deploy"
+          cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling"
+        -
+          display: "Deploy with Migrations"
+          cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling_migrations"
+
+      before_deploy_cmds:
+        - accept-pull
+        - tag-release
+      after_deploy_cmds:
+        - post-deploy-notes
+  -
+    staging: {}
+
