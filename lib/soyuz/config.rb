@@ -15,8 +15,7 @@ module Soyuz
 
   private
     def config_data
-      return @config_data if @config_data
-      load_config
+      @config_data ||= load_config
     end
 
     def load_config
