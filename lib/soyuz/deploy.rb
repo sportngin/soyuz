@@ -29,6 +29,7 @@ module Soyuz
       end
       choice = ask("? ", Integer) { |q| q.in = 1..environments.length }
       @environment = environments[choice-1]
+      ENV['SOYUZ_ENVIRONMENT'] = @environment.name.to_s
     end
 
     def deploy
