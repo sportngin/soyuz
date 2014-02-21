@@ -18,3 +18,12 @@ command :check do |c|
     Soyuz::Config.new(options.config).check
   end
 end
+
+command :deploy do |c|
+  c.syntax = "soyuz deploy [options]"
+  c.description = "Deploy your application"
+  c.action do |args, options|
+    options.default config: ".soyuz.yml"
+    Soyuz::Deploy.new(options.config).execute
+  end
+end
