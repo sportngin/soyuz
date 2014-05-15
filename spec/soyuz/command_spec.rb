@@ -5,6 +5,10 @@ module Soyuz
     let(:cmd){ "echo derp" }
     subject { Command.new(cmd) }
 
+    before do
+      allow(subject).to receive(:puts)
+    end
+
     context "cmd isn't a string" do
       let(:cmd) { 1234 }
       subject { Command }

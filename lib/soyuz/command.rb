@@ -1,4 +1,6 @@
+require 'highline/import'
 require_relative 'command_choice'
+
 module Soyuz
   class Command
     def initialize(cmd)
@@ -11,6 +13,7 @@ module Soyuz
     end
 
     def run
+      say("<%= color('executing [#{@cmd}]...', :green) %>")
       system(@cmd)
     end
   end
