@@ -11,6 +11,7 @@ module Soyuz
     end
 
     def run
+      puts "executing [#{@cmd}]..."
       system(@cmd)
     end
   end

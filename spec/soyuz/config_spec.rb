@@ -5,6 +5,10 @@ module Soyuz
     let(:valid_config){ "files/soyuz_example.yml" }
     subject { Config.new(valid_config) }
 
+    before do
+      allow(subject).to receive(:puts)
+    end
+
     context "#check" do
       it "to raise an InvalidConfig error if the config is invalid" do
         allow(subject).to receive(:valid?) { false }
