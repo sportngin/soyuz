@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ```yaml
 # .soyuz.yml in the app you want to deploy with soyuz
-default:
+defaults:
   deploy_cmd: 'opsicle deploy $SOYUZ_ENVIRONMENT'
   
     
