@@ -19,8 +19,8 @@ DOCUMENTATION
 
 desc "Check your config file to ensure it's valid"
 command 'check' do |c|
-    c.flag [:c, :config], :desc => 'soyuz config file', :default_value => '.soyuz.yml'
-    c.action do |global_options, options, args|
+  c.flag [:c, :config], :desc => 'soyuz config file', :default_value => '.soyuz.yml'
+  c.action do |global_options, options, args|
     options = global_options.merge(options)
     Soyuz::Config.new(options[:config]).check
   end
