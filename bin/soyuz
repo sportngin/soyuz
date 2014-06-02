@@ -1,29 +1,38 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'commander/import'
+require 'gli'
 require 'soyuz'
 
-# :name is optional, otherwise uses the basename of this executable
-program :name, 'soyuz'
-program :version, Soyuz::VERSION
-program :description, 'The trusty old deployment tool-kit'
-default_command :help
-global_option('-c', '--config FILE', 'soyuz config file')
+include GLI::App
 
-command :check do |c|
-  c.syntax = "soyuz check [options]"
-  c.description = "Check your config file to ensure it's valid"
-  c.action do |args, options|
-    options.default config: ".soyuz.yml"
-    Soyuz::Config.new(options.config).check
+program_desc 'The trusty old deployment tool-kit'
+version Soyuz::VERSION
+
+wrap_help_text :verbatim
+
+program_long_desc """
+DOCUMENTATION
+    For documentation and help in setting up your configuration files,
+    see Soyuz's GitHub repo: https://github.com/sportngin/soyuz
+"""
+
+
+desc "Check your config file to ensure it's valid"
+command 'check' do |c|
+  c.flag [:c, :config], :desc => 'soyuz config file', :default_value => '.soyuz.yml'
+  c.action do |global_options, options, args|
+    options = global_options.merge(options)
+    Soyuz::Config.new(options[:config]).check
   end
 end
 
-command :deploy do |c|
-  c.syntax = "soyuz deploy [options]"
-  c.description = "Deploy your application"
-  c.action do |args, options|
-    options.default config: ".soyuz.yml"
-    Soyuz::Deploy.new(options.config).execute
+desc "Deploy your application"
+command 'deploy' do |c|
+  c.flag [:c, :config], :desc => 'soyuz config file', :default_value => '.soyuz.yml'
+  c.action do |global_options, options, args|
+    options = global_options.merge(options)
+    Soyuz::Deploy.new(options[:config]).execute
   end
 end
+
+exit run(ARGV)
