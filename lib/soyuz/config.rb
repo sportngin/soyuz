@@ -1,7 +1,11 @@
 require 'safe_yaml'
 require_relative 'environment'
+require_relative 'support'
+
 module Soyuz
   class Config
+    include Soyuz::Support
+
     def initialize(config_file)
       @config_file = config_file
     end
@@ -40,23 +44,6 @@ module Soyuz
       rescue StandardError
         false
       end
-    end
-
-    def symbolize_keys(hash)
-      return hash unless hash.is_a?(Hash)
-      hash.inject({}){|result, (key, value)|
-        new_key = case key
-                  when String then key.to_sym
-                  else key
-                  end
-        new_value = case value
-                    when Hash then symbolize_keys(value)
-                    when Array then value.map{|el| symbolize_keys(el) }
-                    else value
-                    end
-        result[new_key] = new_value
-        result
-      }
     end
   end
   InvalidConfig = Class.new(StandardError)
