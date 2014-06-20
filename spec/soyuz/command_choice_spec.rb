@@ -14,16 +14,6 @@ module Soyuz
       end
     end
 
-    context "choices keys are not symbols" do
-      let(:choices){ [{'display' => "choice1", 'cmd' => "echo choice1"}, {'display' => "choice2", 'cmd' => "echo choice2" }] }
-      subject { CommandChoice }
-      it "converts the keys" do
-        converted_choices = subject.new(choices).instance_variable_get(:@choices)
-        choice_keys = converted_choices.map {|choice| choice.keys}.flatten
-        expect(choice_keys).to eq([:display, :cmd, :display, :cmd])
-      end
-    end
-
     context "#run" do
       it "creates a command for the given choice" do
         expect(subject).to receive(:say).with("1) choice1").once

@@ -1,13 +1,11 @@
 require_relative "command"
-require_relative "support"
 
 module Soyuz
   class CommandChoice
-    include Soyuz::Support
 
     def initialize(choices)
       raise ArgumentError, "Choices must be an array" unless choices.is_a?(Array)
-      @choices = choices.map { |choice| symbolize_keys(choice) }
+      @choices = choices
     end
 
     def run
