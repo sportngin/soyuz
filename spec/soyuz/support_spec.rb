@@ -50,6 +50,24 @@ describe Soyuz::Support do
         expect(result).to eq([1, 2])
       end
     end
+
+    context "with a hash nested in an array" do
+      subject { [{'foo' => 'bar'}] }
+
+      it "it converts the keys" do
+        result = soyuz_class.send(:symbolize_keys, subject)
+        expect(result).to eq([{:foo => 'bar'}])
+      end
+    end
+
+    context "with a hash deeply nested in multiple arrays" do
+      subject { [[[{'foo' => 'bar'}]]] }
+
+      it "it converts the keys" do
+        result = soyuz_class.send(:symbolize_keys, subject)
+        expect(result).to eq([[[{:foo => 'bar'}]]])
+      end
+    end
   end
 
 end
