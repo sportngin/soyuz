@@ -9,7 +9,7 @@ module Soyuz
     end
 
     def self.build(cmd)
-     cmd.is_a?(Array) ? CommandChoice.new(cmd) : new(cmd)
+      cmd.is_a?(Array) ? CommandChoice.new(cmd) : new(cmd)
     end
 
     def run
