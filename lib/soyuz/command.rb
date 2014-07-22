@@ -14,7 +14,7 @@ module Soyuz
 
     def run
       say("<%= color('executing [#{@cmd}]...', :green) %>")
-      system(@cmd)
+      exit(false) unless system(@cmd)
     end
   end
 end
