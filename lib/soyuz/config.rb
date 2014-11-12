@@ -41,6 +41,7 @@ module Soyuz
     def valid?
       begin
         File.exists?(@config_file) && config_data.is_a?(Hash)
+        environments.all?{|env| env.valid?}
       rescue StandardError
         false
       end
