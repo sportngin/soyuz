@@ -1,6 +1,8 @@
 require_relative "command"
+
 module Soyuz
   class CommandChoice
+
     def initialize(choices)
       raise ArgumentError, "Choices must be an array" unless choices.is_a?(Array)
       @choices = choices

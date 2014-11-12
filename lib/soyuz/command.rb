@@ -9,13 +9,13 @@ module Soyuz
     end
 
     def self.build(cmd)
-     return if cmd.empty?
-     cmd.is_a?(Array) ? CommandChoice.new(cmd) : new(cmd)
+      return if cmd.empty?
+      cmd.is_a?(Array) ? CommandChoice.new(cmd) : new(cmd)
     end
 
     def run
       say("<%= color('executing [#{@cmd}]...', :green) %>")
-      system(@cmd)
+      exit(false) unless system(@cmd)
     end
   end
 end

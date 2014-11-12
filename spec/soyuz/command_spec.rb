@@ -18,8 +18,16 @@ module Soyuz
     end
 
     context "#run" do
+      before(:each) { allow(subject).to receive(:say) }
+
       it "to make a system call" do
+        expect(subject).to receive(:system).and_return(true)
+        subject.run
+      end
+
+      it "exits if the command returns a non-zero exist status" do
         expect(subject).to receive(:system)
+        expect(subject).to receive(:exit)
         subject.run
       end
     end
