@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'soyuz/environment'
 module Soyuz
   describe Environment do
-    let(:attributes){ {environment: {deploy_cmd: "echo derp", before_deploy_cmds: ['echo before', 'echo more before'], after_deploy_cmds: ['echo after', 'echo another after']}} }
+    let(:attributes){ {environment: {deploy_cmd: "echo derp", deploy_cmds: ["echo herp", "echo blarg"], before_deploy_cmds: ['echo before', 'echo more before'], after_deploy_cmds: ['echo after', 'echo another after']}} }
     subject{ Environment.new(attributes) }
     let(:cmd){ double("Command") }
 
@@ -28,7 +28,7 @@ module Soyuz
     context "#deploy" do
       it "runs the deploy command" do
         allow(Command).to receive(:new).and_return(cmd)
-        expect(cmd).to receive(:run)
+        expect(cmd).to receive(:run).exactly(3).times
         subject.deploy
       end
     end

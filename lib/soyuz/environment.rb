@@ -19,7 +19,10 @@ module Soyuz
     end
 
     def deploy
-      @deploy_cmd.run
+      @deploy_cmds.each do |cmd|
+        cmd.run
+      end unless @deploy_cmds.empty?
+      @deploy_cmd.run if @deploy_cmd
     end
 
     def name
@@ -35,6 +38,7 @@ module Soyuz
 
     def build
       @deploy_cmd = Command.build(@attributes[:deploy_cmd])
+      @deploy_cmds = Array(@attributes[:deploy_cmds]).compact.map{|cmd| Command.build(cmd) }
       @before_callbacks = Array(@attributes[:before_deploy_cmds]).compact.map{|cmd| Command.build(cmd) }
       @after_callbacks = Array(@attributes[:after_deploy_cmds]).compact.map{|cmd| Command.build(cmd) }
     end
