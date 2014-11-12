@@ -9,7 +9,7 @@ module Soyuz
     end
 
     def self.build(cmd)
-      return unless cmd && !cmd.empty?
+      return if cmd.nil? || cmd.empty?
       cmd.is_a?(Array) ? CommandChoice.new(cmd) : new(cmd)
     end
 
