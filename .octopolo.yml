@@ -1,1 +1,4 @@
 github_repo: sportngin/soyuz
+semantic_versioning: true
+branches_to_keep:
+  - master
