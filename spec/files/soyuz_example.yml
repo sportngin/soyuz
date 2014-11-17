@@ -12,6 +12,9 @@ environments:
         -
           display: "Deploy with Migrations"
           cmd: "echo deploying with migrations $SOYUZ_ENVIRONMENT"
+      deploy_cmds:
+        - "echo deploy command 1"
+        - "echo deploy command 2"
 
       before_deploy_cmds:
         - "echo before deploy callback"

@@ -21,20 +21,22 @@ Or install it yourself as:
 ```yaml
 # .soyuz.yml in the app you want to deploy with soyuz
 defaults:
-  deploy_cmd: 'opsicle deploy $SOYUZ_ENVIRONMENT'
-  
-    
+  deploy_cmds:
+    - 'opsicle deploy $SOYUZ_ENVIRONMENT'
+
+
 environments:
-  - 
+  -
     production:
-      deploy_cmd: 
+      deploy_cmds:
         -
-          display: "Deploy"
-          cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling"
-        -
-          display: "Deploy with Migrations"
-          cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling_migrations"
- 
+          -
+            display: "Deploy"
+            cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling"
+          -
+            display: "Deploy with Migrations"
+            cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling_migrations"
+
       before_deploy_cmds:
         - accept-pull
         - tag-release
@@ -68,6 +70,11 @@ cap production deploy:rolling_migrations
 post-deploy-notes
 # post all of your deploy notes somewhere useful
 ```
+
+## Deprications
+
+`:deploy_cmd` has be depricated in favor of `:deploy_cmds` to better
+match the before_deploy_cmds and after_deploy_cmds symantics
 
 ## Contributing
 

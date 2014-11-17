@@ -15,12 +15,26 @@ module Soyuz
     end
 
     context "#run" do
+
       it "creates a command for the given choice" do
         expect(subject).to receive(:say).with("1) choice1").once
         expect(subject).to receive(:say).with("2) choice2").once
         expect(subject).to receive(:ask).with(instance_of(String), Integer).and_return(1).once
-        expect(Command).to receive(:new).with("echo choice1").and_return(command_double)
+        expect(Command).to receive(:build).with("echo choice1").and_return(command_double)
         subject.run
+      end
+
+      context "Nested choices" do
+        let(:nested_choices) { [{display: "choice1.1", cmd: "echo choice1.1"}, {display: "choice1.2", cmd: "echo choice1.2" }] }
+        let(:choices){ [{display: "choice1", cmd: nested_choices }, {display: "choice2", cmd: "echo choice2" }] }
+
+        it "creates a command for the given choice" do
+          expect(subject).to receive(:say).with("1) choice1").once
+          expect(subject).to receive(:say).with("2) choice2").once
+          expect(subject).to receive(:ask).with(instance_of(String), Integer).and_return(1).once
+          expect(Command).to receive(:build).with(nested_choices).and_return(command_double)
+          subject.run
+        end
       end
     end
 
