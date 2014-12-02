@@ -1,11 +1,12 @@
 defaults:
-  deploy_cmd: gem push *.gem
+  deploy_cmds:
+    - gem build soyuz.gemspec
+    - gem push *.gem
   before_deploy_cmds:
     - op tag-release
     - sed -i '' -e "s/\".*/\"$(git tag | tail -1 | sed s/v//)\"/" lib/soyuz/version.rb
     - git add  lib/soyuz/version.rb
     - git commit -m "Version Bump" && git push
-    - gem build soyuz.gemspec
   after_deploy_cmds:
     - rm *.gem
 environments:
