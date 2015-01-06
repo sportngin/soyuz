@@ -50,6 +50,16 @@ module Soyuz
           subject.build(cmd)
         end
       end
+
+      context "cmd is a env command" do
+        let(:cmd) { {:env_var => "FOO", :env_val => "BAR" } }
+        subject { Command }
+
+        it "sets the ENV based off of the :env_var and :env_val" do
+          expect(CommandEnv).to receive(:new).with(cmd)
+          subject.build(cmd)
+        end
+      end
     end
   end
 end

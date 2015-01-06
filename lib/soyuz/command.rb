@@ -1,5 +1,6 @@
 require 'highline/import'
 require_relative 'command_choice'
+require_relative 'command_env'
 
 module Soyuz
   class Command
@@ -10,7 +11,14 @@ module Soyuz
 
     def self.build(cmd)
       return if cmd.nil? || cmd.empty?
-      cmd.is_a?(Array) ? CommandChoice.new(cmd) : new(cmd)
+
+      if cmd.is_a?(Array)
+        CommandChoice.new(cmd)
+      elsif cmd.is_a?(Hash)
+        CommandEnv.new(cmd)
+      else
+        new(cmd)
+      end
     end
 
     def run
