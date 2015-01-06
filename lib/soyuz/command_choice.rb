@@ -13,7 +13,11 @@ module Soyuz
         say "#{index+1}) #{choice[:display]}"
       end
       choice = ask("? ", Integer) { |q| q.in = 1..@choices.length }
-      Command.build(@choices[choice-1][:cmd]).run
+      build_command(choice-1)
+    end
+
+    def build_command(choice)
+      Command.build(@choices[choice][:cmd]).run
     end
   end
 end
