@@ -16,6 +16,11 @@ DOCUMENTATION
     see Soyuz's GitHub repo: https://github.com/sportngin/soyuz
 """
 
+switch [:non_interactive], :desc => 'Non-interactive deploy using default choices.', :negatable => false
+pre do |global_options, command, options, args|
+  $non_interactive = global_options[:non_interactive]
+  true
+end
 
 desc "Check your config file to ensure it's valid"
 command 'check' do |c|

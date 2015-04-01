@@ -33,6 +33,7 @@ environments:
           -
             display: "Deploy"
             cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling"
+            default: true
           -
             display: "Deploy with Migrations"
             cmd: "cap $SOYUZ_ENVIRONMENT deploy:rolling_migrations"
@@ -49,8 +50,9 @@ environments:
 
 ## Usage
 
+Interactive:
 ```bash
-bundle exec soyuz deploy
+soyuz deploy
 # => 1. production
 # => 2. staging
 1
@@ -71,7 +73,13 @@ post-deploy-notes
 # post all of your deploy notes somewhere useful
 ```
 
-## Deprications
+Non-interactive mode requires that you pass the environment argument and that all choices in your config have a default flagged.
+```bash
+soyuz --non_interactive deploy staging
+```
+
+
+## Deprecations
 
 `:deploy_cmd` has be depricated in favor of `:deploy_cmds` to better
 match the before_deploy_cmds and after_deploy_cmds symantics

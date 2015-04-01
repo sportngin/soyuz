@@ -4,7 +4,7 @@ module Soyuz
     def initialize(env_name, options)
       @config = Config.new(options[:config])
       @config.validate!
-      set_environment(env_name) if env_name
+      set_environment(env_name) if env_name || $non_interactive
     end
 
     def execute
