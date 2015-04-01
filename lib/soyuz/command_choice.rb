@@ -7,7 +7,7 @@ module Soyuz
       raise ArgumentError, "Choices must be an array" unless choices.is_a?(Array)
       @choices = choices
       @default_choice = default_choice_number
-      raise ArgumentError, "Default choice required for non interactive mode." if use_default?
+      raise ArgumentError, "Default choice required for non interactive mode." if @default_choice.nil? && $non_interactive
     end
 
     def default_choice_number
@@ -17,18 +17,14 @@ module Soyuz
       nil
     end
 
-    def use_default?
-      @default_choice.nil? && $non_interactive
-    end
-
     def run
-      if use_default?
-        choice = default_choice_number
-      else
+      if @default_choice.nil?
         @choices.each_with_index do |choice, index|
           say "#{index+1}) #{choice[:display]}"
         end
         choice = ask("? ", Integer) { |q| q.in = 1..@choices.length }
+      else
+        choice = default_choice_number
       end
       build_command(choice-1)
     end
