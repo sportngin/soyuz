@@ -21,3 +21,10 @@ RSpec.configure do |config|
   #     --seed 1234
   #config.order = 'random'
 end
+
+CONFIG_PATHS = {
+    valid_modern: File.expand_path("../files/soyuz_valid_modern.yml", __FILE__),
+    valid_legacy: File.expand_path("../files/soyuz_valid_legacy.yml", __FILE__),
+    incompatible: File.expand_path("../files/soyuz_incompatible.yml", __FILE__),
+    invalid: File.expand_path("../files/soyuz_invalid.yml", __FILE__),
+}

@@ -2,11 +2,13 @@ require "spec_helper"
 require "soyuz/deploy"
 module Soyuz
   describe Deploy do
-    let(:valid_config){ "files/soyuz_example.yml" }
-    subject { Deploy.new(valid_config) }
+    subject { Deploy.new(nil, config: CONFIG_PATHS[:valid_modern]) }
 
     before do
       allow_any_instance_of(Config).to receive(:validate!)
+      allow_any_instance_of(HighLine).to receive(:say)
+      allow_any_instance_of(HighLine).to receive(:ask) { 1 }
+      allow(ENV).to receive("[]=").with("SOYUZ_ENVIRONMENT", kind_of(String))
     end
 
     context "#execute" do
@@ -14,12 +16,10 @@ module Soyuz
         allow(subject).to receive(:before_callbacks)
         allow(subject).to receive(:deploy)
         allow(subject).to receive(:after_callbacks)
-        expect(subject).to receive(:choose_environment)
         subject.execute
       end
 
       it "to call before callbacks" do
-        allow(subject).to receive(:choose_environment)
         allow(subject).to receive(:deploy)
         allow(subject).to receive(:after_callbacks)
         expect(subject).to receive(:before_callbacks)
@@ -27,7 +27,6 @@ module Soyuz
       end
 
       it "to call deploy" do
-        allow(subject).to receive(:choose_environment)
         allow(subject).to receive(:before_callbacks)
         allow(subject).to receive(:after_callbacks)
         expect(subject).to receive(:deploy)
@@ -35,7 +34,6 @@ module Soyuz
       end
 
       it "to call after callbacks" do
-        allow(subject).to receive(:choose_environment)
         allow(subject).to receive(:before_callbacks)
         allow(subject).to receive(:deploy)
         expect(subject).to receive(:after_callbacks)

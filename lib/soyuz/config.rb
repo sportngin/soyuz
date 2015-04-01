@@ -35,16 +35,16 @@ module Soyuz
     end
 
     def load_config
+      File.open(@config_file, 'r:bom|utf-8')
       symbolize_keys(SafeYAML.load_file(@config_file))
     end
 
     def valid?
-      begin
-        File.exists?(@config_file) && config_data.is_a?(Hash)
-        environments.all?{|env| env.valid?}
-      rescue StandardError
-        false
-      end
+      File.exists?(@config_file) && config_data.is_a?(Hash)
+      environments.all?{|env| env.valid?}
+    rescue StandardError => e
+      puts e.message
+      false
     end
   end
   InvalidConfig = Class.new(StandardError)
