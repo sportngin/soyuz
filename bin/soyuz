@@ -16,6 +16,11 @@ DOCUMENTATION
     see Soyuz's GitHub repo: https://github.com/sportngin/soyuz
 """
 
+switch [:non_interactive], :desc => 'Non-interactive deploy using default choices.', :negatable => false
+pre do |global_options, command, options, args|
+  $non_interactive = global_options[:non_interactive]
+  true
+end
 
 desc "Check your config file to ensure it's valid"
 command 'check' do |c|
@@ -27,11 +32,12 @@ command 'check' do |c|
 end
 
 desc "Deploy your application"
+arg_name '<environment>'
 command 'deploy' do |c|
   c.flag [:c, :config], :desc => 'soyuz config file', :default_value => '.soyuz.yml'
   c.action do |global_options, options, args|
     options = global_options.merge(options)
-    Soyuz::Deploy.new(options[:config]).execute
+    Soyuz::Deploy.new(args.first, options).execute
   end
 end
 
