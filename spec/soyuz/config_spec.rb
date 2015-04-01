@@ -32,7 +32,7 @@ module Soyuz
       context "invalid" do
         subject { Config.new(CONFIG_PATHS[:invalid]) }
         it "to raise an InvalidConfig error if the config is invalid" do
-          expect(STDOUT).to receive(:puts).with("no implicit conversion of Symbol into Integer")
+          expect(STDOUT).to receive(:puts).with(kind_of(String))
           expect{ subject.check }.to raise_error(InvalidConfig)
         end
       end
