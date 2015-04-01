@@ -35,7 +35,6 @@ module Soyuz
     end
 
     def load_config
-      File.open(@config_file, 'r:bom|utf-8')
       symbolize_keys(SafeYAML.load_file(@config_file))
     end
 
