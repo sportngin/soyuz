@@ -1,0 +1,25 @@
+---
+defaults:
+  deploy_cmds:
+  - 'echo default deploy $SOYUZ_ENVIRONMENT'
+
+environments:
+  -
+    production:
+      deploy_cmds:
+      -
+        -
+          display: "Deploy"
+          cmd: "echo deploying $SOYUZ_ENVIRONMENT "
+          default: true
+        -
+          display: "Deploy with Migrations"
+          cmd: "echo deploying with migrations $SOYUZ_ENVIRONMENT"
+
+      before_deploy_cmds:
+        - "echo before deploy callback"
+      after_deploy_cmds:
+        - "echo after deploy callback"
+  -
+    staging: {}
+
