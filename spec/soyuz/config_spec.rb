@@ -2,6 +2,9 @@ require "spec_helper"
 require "soyuz/config"
 module Soyuz
   describe Config do
+    before do
+      $non_interactive = false
+    end
 
     context "#check" do
       context "valid modern" do
@@ -10,10 +13,27 @@ module Soyuz
           expect(STDOUT).to receive(:puts).with("Config file is valid. We are go for launch.")
           expect{ subject.check }.to_not raise_error
         end
+        it "to raise an InvalidConfig error in non interactive mode" do
+          $non_interactive = true
+          expect(STDOUT).to receive(:puts).with("Default choice required for non interactive mode.")
+          expect{ subject.check }.to raise_error(InvalidConfig)
+        end
       end
 
       context "valid legacy" do
         subject { Config.new(CONFIG_PATHS[:valid_legacy]) }
+
+        it "to not raise an error if the config is valid" do
+          expect(STDOUT).to receive(:puts).with("Config file is valid. We are go for launch.")
+          expect{ subject.check }.to_not raise_error
+        end
+      end
+
+      context "non interactive" do
+        subject { Config.new(CONFIG_PATHS[:non_interactive]) }
+        before do
+          $non_interactive = true
+        end
 
         it "to not raise an error if the config is valid" do
           expect(STDOUT).to receive(:puts).with("Config file is valid. We are go for launch.")
