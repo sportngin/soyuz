@@ -6,8 +6,11 @@ module Soyuz
     def initialize(choices)
       raise ArgumentError, "Choices must be an array" unless choices.is_a?(Array)
       @choices = choices
-      @default_choice = default_choice_number
-      raise ArgumentError, "Default choice required for non interactive mode." if @default_choice.nil? && $non_interactive
+
+      if $non_interactive
+        @default_choice = default_choice_number
+        raise ArgumentError, "Default choice required for non interactive mode." if @default_choice.nil?
+      end
     end
 
     def default_choice_number
