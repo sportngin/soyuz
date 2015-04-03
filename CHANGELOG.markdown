@@ -1,3 +1,8 @@
+#### v0.3.1
+* Fixing bug with default so its only used in non-interactive
+
+  > Brian Bergstrom: Elliot Hursh: https://github.com/sportngin/soyuz/pull/19
+
 #### v0.3.0
 * Adding support for environment argument
 
