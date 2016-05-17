@@ -1,3 +1,4 @@
+#### v0.3.2
 #### v0.3.1
 * Fixing bug with default so its only used in non-interactive
 
