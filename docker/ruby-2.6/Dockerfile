@@ -1,9 +1,10 @@
-FROM ruby:2.2-slim
+ARG RUBY_VERSION=2.2
+FROM ruby:${RUBY_VERSION}-slim
 
 # Install necessary packages
 RUN apt-get update -q && \
     apt-get install -qy \
-    libncurses5-dev libncursesw5-dev gcc libffi-dev make ssh git
+    libncurses5-dev libncursesw5-dev default-libmysqlclient-dev gcc libffi-dev make ssh git
 
 # Install pip3 and aws cli tools
 RUN apt-get install python3-pip -y
