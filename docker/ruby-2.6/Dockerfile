@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=2.2
+ARG RUBY_VERSION=2.6
 FROM ruby:${RUBY_VERSION}-slim
 
 # Install necessary packages

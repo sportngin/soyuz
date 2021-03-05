@@ -79,7 +79,7 @@ soyuz --non_interactive deploy staging
 ```
 ## Building Docker Image
 Run in the root directory of this repo (building with ruby 2.2 for this example):
-`docker build --build-arg RUBY_VERSION=2.2  . -t soyuz:ruby-2.2`
+`cd ruby-2.2 && docker build --build-arg . -t soyuz:ruby-2.2`
 
 ## Running Soyuz in Docker Container (building with ruby 2.2 for this example):
 Create an alias in your ~/.bash_profile (or the like) with the below
