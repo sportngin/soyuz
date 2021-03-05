@@ -77,7 +77,14 @@ Non-interactive mode requires that you pass the environment argument and that al
 ```bash
 soyuz --non_interactive deploy staging
 ```
+## Building Docker Image
+Run in the root directory of this repo:
+`docker build . -t soyuz:latest`
 
+## Running Soyuz in Docker Container
+Create an alias in your ~/.bash_profile (or the like) with the below
+`alias soyuz='docker run -it -v $(pwd)/.soyuz.yml:/.soyuz.yml -v $(pwd)/.opsicle:/.opsicle -v ~/.aws/credentials:/root/.aws/credentials -v ~/.ssh:/root/.ssh soyuz:latest'`
+`source ~/.bash_profile`
 
 ## Deprecations
 
