@@ -77,7 +77,16 @@ Non-interactive mode requires that you pass the environment argument and that al
 ```bash
 soyuz --non_interactive deploy staging
 ```
+## Building Docker Image
+Run in the root directory of this repo (building with ruby 2.2 for this example):
+`cd ruby-2.2 && docker build --build-arg . -t soyuz:ruby-2.2`
 
+## Running Soyuz in Docker Container (building with ruby 2.2 for this example):
+Create an alias in your ~/.bash_profile (or the like) with the below
+`alias soyuz-2.2='docker run -it -v $(pwd)/.soyuz.yml:/.soyuz.yml -v $(pwd)/.opsicle:/.opsicle -v $(pwd):/codebase -v ~/.aws/credentials:/root/.aws/credentials -v ~/.ssh:/root/.ssh soyuz:ruby-2.2'`
+`source ~/.bash_profile`
+Deploy with ruby 2.2:
+`soyuz-2.2 deploy staging`
 
 ## Deprecations
 
